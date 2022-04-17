@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Clayful from "clayful/client-js"
-
-
+import Clayful from "clayful/client-js";
 
 function RegisterPage() {
-  const navigate =  useNavigate();
+  const navigate = useNavigate();
   const [email, setEamil] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,21 +16,22 @@ function RegisterPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-     
+
     var Customer = Clayful.Customer;
 
     var payload = {
       email,
       password,
     };
-    console.log('payload', payload)
+    console.log("payload", payload);
 
     Customer.createMe(payload, function (err, result) {
       if (err) {
         // Error case
         console.log(err.code);
+        return;
       }
-      navigate("/login")
+      navigate("/login");
     });
   };
 
@@ -48,7 +47,7 @@ function RegisterPage() {
           name="email"
           value={email}
         />
-
+        <br />
         <input
           onChange={handlePasswordChange}
           placeholder="비밀번호"
@@ -56,7 +55,9 @@ function RegisterPage() {
           name="password"
           value={password}
         />
+        <br />
         <button type="submit">회원가입</button>
+        <br />
         <Link to="/login" style={{ color: "gray", textDecoration: "none" }}>
           이미 Apple ID가 있다면? 지금 로그인.
         </Link>
